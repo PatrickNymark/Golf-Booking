@@ -20,6 +20,12 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+// Routes
+const clubs = require('./routes/api/clubs');
+
+// Use routes
+app.use('/api/clubs', clubs);
+
 const port = 5000 || process.env.PORT;
 
 app.listen(port, () => console.log(`Server running on ${port}`));
