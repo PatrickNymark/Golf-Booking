@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Test from './components/Test';
+import AllClubs from './components/AllClubs';
 
 class App extends Component {
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
           </header>
         </div>
         <Router>
-          <Route exact path="/test" component={Test} />
+          <Route exact path="/all-clubs" component={AllClubs} />
         </Router>
       </Provider>
     );

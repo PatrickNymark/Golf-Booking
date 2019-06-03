@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { testDispatch } from '../actions/postActions';
+import { createClub } from '../actions/clubActions';
 
-class Test extends Component {
+class AllClubs extends Component {
   render() {
     return (
       <div>
         <h1>Test Route</h1>
-        <button onClick={this.props.testDispatch}>Click to dispatch</button>
+        <button onClick={this.props.createClub}>Click to dispatch</button>
       </div>
     );
   }
@@ -15,5 +15,5 @@ class Test extends Component {
 
 export default connect(
   null,
-  { testDispatch }
-)(Test);
+  { createClub }
+)(AllClubs);
