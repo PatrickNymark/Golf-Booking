@@ -1,13 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 // Initialize
 const app = express();
 
+// .env config
+require('dotenv').config();
+
 // Database config
-const db = require('./config/keys').mongoURI;
 mongoose
-  .connect(db, {
+  .connect(process.env.mongoURI, {
     useNewUrlParser: true
   })
   .then(res => console.log('Database connected'))
@@ -19,6 +22,10 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.json());
+
+// Passport Config
+app.use(passport.initialize());
+require('./middleware/passport')(passport);
 
 // Routes
 const clubs = require('./routes/api/clubs');
