@@ -3,11 +3,13 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
-  name: {
+  firstName: {
     type: String,
-    required: true,
-    minlength: 3,
-    maxlength: 50
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
   },
   email: {
     type: String,
@@ -22,7 +24,13 @@ const UserSchema = new Schema({
     minlength: 3,
     maxlength: 255
   },
-  isAdmin: Boolean
+  role: {
+    type: String,
+    enum: [ 'player', 'trainer', 'admin'],
+    default: 'player'
+  }
+}, {
+  timestamps: true
 });
 
 UserSchema.pre("save", function(next) {
@@ -48,10 +56,9 @@ UserSchema.methods.comparePassword = function(plainPassword, cb) {
   });
 };
 
-//custom method to generate authToken 
-UserSchema.methods.generateAuthToken = function() { 
-  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, process.env.secretOrKey); 
-  return token;
-}
+UserSchema.virtual('fullName').get(function () {
+  return this.firstName + ' ' + this.lastName;
+});
+
 
 module.exports = User = mongoose.model('users', UserSchema);

@@ -1,14 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const logger = require('morgan');
 
-// Initialize
+// initialize
 const app = express();
 
 // .env config
 require('dotenv').config();
 
-// Database config
+// logger config
+app.use(logger('dev'));
+
+// database config
 mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true
@@ -16,22 +20,22 @@ mongoose
   .then(res => console.log('Database connected'))
   .catch(err => console.log(err));
 
-// Body-parser middleware
+// body-parser middleware
 app.use(express.urlencoded({
   extended: true
 }));
 
 app.use(express.json());
 
-// Passport Config
-app.use(passport.initialize());
+// passport Config
 require('./middleware/passport')(passport);
+app.use(passport.initialize());
 
-// Routes
-const clubs = require('./routes/api/clubs');
+// routes
+const users = require('./routes/api/auth');
 
-// Use routes
-app.use('/api/clubs', clubs);
+// use routes
+app.use('/api/users', users);
 
 const port = 5000 || process.env.PORT;
 
