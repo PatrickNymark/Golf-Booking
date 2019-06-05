@@ -33,9 +33,11 @@ app.use(passport.initialize());
 
 // routes
 const users = require('./routes/api/auth');
+const bookings = require('./routes/api/bookings/bookings');
 
 // use routes
 app.use('/api/users', users);
+app.use('/api/bookings', bookings)
 
 const port = 5000 || process.env.PORT;
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TeeTimeSchema = new Schema({
+const BookingSchema = new Schema({
   players: [{
     type: Schema.Types.ObjectId,
     required: true
@@ -20,4 +20,4 @@ const TeeTimeSchema = new Schema({
   }
 });
 
-module.exports = TeeTime = mongoose.model('teeTimes');
+module.exports = Booking = mongoose.model('bookings', BookingSchema);
