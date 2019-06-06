@@ -32,12 +32,14 @@ require('./middleware/passport')(passport);
 app.use(passport.initialize());
 
 // routes
-const users = require('./routes/api/auth');
+const auth = require('./routes/api/auth');
 const bookings = require('./routes/api/bookings/bookings');
+const staff = require('./routes/api/staff/staff');
 
 // use routes
-app.use('/api/users', users);
-app.use('/api/bookings', bookings)
+app.use('/api/auth', auth);
+app.use('/api/bookings', bookings);
+app.use('/api/staff', staff);
 
 const port = 5000 || process.env.PORT;
 
