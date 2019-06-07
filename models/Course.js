@@ -7,8 +7,14 @@ const CourseSchema = new Schema({
     required: true
   },
   holes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'holes'
+    tees: [{
+      teeNumber: Number,
+      holeLength: Number
+    }],
+    currentFlagPosition: {
+      yCordinate: Number,
+      xCordinate: Number
+    }
   }]
 })
 
