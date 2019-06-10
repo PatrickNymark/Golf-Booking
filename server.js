@@ -35,11 +35,13 @@ app.use(passport.initialize());
 const auth = require('./routes/api/auth');
 const bookings = require('./routes/api/bookings/bookings');
 const staff = require('./routes/api/staff/staff');
+const clubs = require('./routes/api/clubs/clubs');
 
 // use routes
 app.use('/api/auth', auth);
 app.use('/api/bookings', bookings);
 app.use('/api/staff', staff);
+app.use('/api/clubs', clubs);
 
 const port = 5000 || process.env.PORT;
 
