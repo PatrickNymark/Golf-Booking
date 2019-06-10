@@ -17,10 +17,12 @@ exports.register = (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    role: 'admin'
+    role: req.body.role
   })
 
-  newUser.save().then(user => res.json(user)).catch(err => res.status(500).json(err.message))
+  newUser.save().then(user => res.json(user)).catch(err => {
+    res.status(500).json(err.message)
+  })
 }
 
 exports.login = (req, res) => {
