@@ -32,9 +32,6 @@ module.exports = function (data) {
     errors.email = "Email field is required"
   }
 
-
-
-
   return {
     isValid: isEmpty(errors),
     errors

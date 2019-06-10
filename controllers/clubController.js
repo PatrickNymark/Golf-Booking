@@ -11,7 +11,7 @@ exports.createClub = (req, res) => {
   } = clubValidator(req.body);
 
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(422).json(errors);
   }
 
   const newClub = new Club({
@@ -26,6 +26,18 @@ exports.createClub = (req, res) => {
 
   newClub.save().then(club => res.json(club)).catch(err => res.status(500).json(err.message))
 }
+
+exports.removeClub = (req, res) => {
+  const { id } = req.params;
+
+  Club.findById(id).then(club => {
+    if(!club) {
+      return res.status(404).json({ error: 'Club not found'})
+    }
+
+    club.remove().then(club => res.json(club)).catch(err => res.status(500).json(err.message))
+  })
+} 
 
 exports.findAllClubs = (req, res) => {
   Club.find().then(clubs => {
