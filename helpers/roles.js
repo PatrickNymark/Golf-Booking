@@ -1,0 +1,1 @@
+module.exports = ['staff', 'admin', 'player', 'trainer'];  

@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
+// roles
+const roles = require('../helpers/roles');
+
 const UserSchema = new Schema({
   name: {
     first: {
@@ -28,7 +31,7 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: [ 'player', 'trainer', 'admin'],
+    enum: roles,
     default: 'player'
   }
 }, {

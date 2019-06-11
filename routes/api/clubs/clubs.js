@@ -21,6 +21,6 @@ router.post('/create', passport.authenticate(), roleAuthorization.authenticate([
 /**
  * remove club
  */ 
-router.post('/remove/${id}', clubController.removeClub); 
+router.post('/remove/${id}', passport.authenticate(), roleAuthorization.authenticate(['admin']), clubController.removeClub); 
 
 module.exports = router;
