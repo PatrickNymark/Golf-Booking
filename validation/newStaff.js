@@ -7,16 +7,11 @@ module.exports = function (data) {
   const errors = {};
 
   // Check for undefined/empty
-  data.name.first = isEmpty(data.name.first) ? '' : data.name.first;
-  data.name.last = isEmpty(data.name.last) ? '' : data.name.last;
   data.gender = isEmpty(data.gender) ? '' : data.gender;
+  data.club = isEmpty(data.club) ? '' : data.club;
 
-  if (Validator.isEmpty(data.name.first)) {
-    errors.name.first = 'First name is required';
-  }
-
-  if (Validator.isEmpty(data.name.last)) {
-    errors.name.last = 'Last name is required';
+  if (Validator.isEmpty(data.club)) {
+    errors.club = 'Club is required';
   }
 
   if (Validator.isEmpty(data.gender)) {

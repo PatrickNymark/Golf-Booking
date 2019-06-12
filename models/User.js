@@ -31,8 +31,7 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: roles,
-    default: 'player'
+    enum: roles
   }
 }, {
   timestamps: true

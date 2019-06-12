@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/authActions';
 import axios from 'axios';
 
 class Login extends Component {
@@ -16,14 +18,12 @@ class Login extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const payload = {
-      password: this.state.password,
-      email: this.state.email
+    const userDate = {
+      email: this.state.email,
+      password: this.state.password
     }
 
-    axios.post('/api/auth/login', payload).then(res => {
-      console.log(res.data)
-    })
+    this.props.loginUser(userDate, this.props.history);
   }
 
   render() {
@@ -50,5 +50,5 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default connect(null, { loginUser })(Login);
 

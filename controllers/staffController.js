@@ -11,10 +11,6 @@ exports.createStaff = (req, res) => {
   }
 
   const newStaff = new Staff({
-    name: {
-      first: req.body.name.first,
-      last: req.body.name.first
-    },
     gender: req.body.gender,
     club: req.body.club,
     user: req.body.user

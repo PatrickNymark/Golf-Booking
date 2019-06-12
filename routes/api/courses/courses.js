@@ -18,4 +18,5 @@ router.post('/create', passport.authenticate(), roleAuthorization.authenticate([
  */
 router.post('/delete/${id}', passport.authenticate(), roleAuthorization.authenticate(['staff']), courseController.deleteCourse);
 
+
 module.exports = router;
