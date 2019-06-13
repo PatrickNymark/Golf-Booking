@@ -1,19 +1,18 @@
-import { userConstants } from '../constants/user.constants';
-import { userService } from '../_services';
-import { alertActions } from './';
-import { history } from '../_helpers';
-
+import { userConstants } from '../constants';
+import { userService } from '../services/user.service';
+import { alertActions } from '../actions';
+import { history } from '../helpers';
 export const userActions = {
     login,
     logout,
     getAll
 };
 
-function login(username, password) {
+function login(email, password) {
     return dispatch => {
-        dispatch(request({ username }));
+        dispatch(request({ email }));
 
-        userService.login(username, password)
+        userService.login(email, password)
             .then(
                 user => { 
                     dispatch(success(user));

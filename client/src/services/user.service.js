@@ -1,5 +1,5 @@
-import { authHeader } from '../helpers/auth-header';
-import axios from 'axios';
+import { authHeader } from '../helpers';
+import jwt_decode from 'jwt-decode';
 
 export const userService = {
     login,
@@ -7,43 +7,29 @@ export const userService = {
     getAll
 };
 
-function login(userData) {
-  axios.post('/api/auth/login', userData).then(res => {
-    // store user details and jwt token in local storage to keep user logged in between page refreshes
-    localStorage.setItem(res.data)
-
-    return user;
-  })
-}
-
-
-
-/*function login(username, password) {
+function login(email, password) {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email, password })
     };
 
-    axios.post()
-
-    return fetch(`/api//authenticate`, requestOptions)
+    return fetch(`/api/auth/login`, requestOptions)
         .then(handleResponse)
-        .then(user => {
+        .then(response => {
+            const { token } = response;
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('user', JSON.stringify(token));
 
-            return user;
+            // decode token to return the user
+            const decoded = jwt_decode(token)
+            return decoded;
         });
-} */
+}
 
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
-}
-
-function getAll() {
-  axios.get('/api/')
 }
 
 function getAll() {
@@ -52,20 +38,21 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+    return fetch(`/api/auth/all`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
     return response.text().then(text => {
-        const data = text && JSON.parse(text);
+        const data = JSON.parse(text);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-                location.reload(true);
+                Location.reload(true);
             }
 
-            const error = (data && data.message) || response.statusText;
+            console.log(data)
+            const error = data.error || response.statusText;
             return Promise.reject(error);
         }
 

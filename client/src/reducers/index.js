@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import clubReducer from './clubReducer';
-import authReducer from './authReducer';
+import { alert  } from '../reducers/alert.reducer';
+import { authentication } from '../reducers/auth.reducer';
+import { users  } from '../reducers/user.reducer';
 
 export default combineReducers({
-  club: clubReducer,
-  auth: authReducer
+  alert,
+  authentication,
+  users
 });
