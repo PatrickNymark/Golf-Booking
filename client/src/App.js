@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import jwt from 'jsonwebtoken';
+import { Router, Route } from 'react-router-dom';
+
 import './App.css';
 
 
-import store from './store';
+import { history } from './helpers/history';
 import Navbar from './components/Navbar';
-
+import { LoginPage } from './components/LoginPage';
+import HomePage from './components/HomePage';
 
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <div>
             <Navbar />
-     
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/login" component={LoginPage} />
           </div>
         </Router>
-      </Provider>
     );
   }
 }
 
-export default App;
+export default App; 
