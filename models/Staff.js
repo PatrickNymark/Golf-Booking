@@ -6,10 +6,6 @@ const StaffSchema = new Schema({
     type: String,
     required: true
   },
-  club: {
-    type: Schema.Types.ObjectId,
-    ref: 'clubs'
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'users'

@@ -32,17 +32,16 @@ app.use(express.json());
 // routes
 const bookings = require('./routes/api/bookings/bookings');
 const staff = require('./routes/api/staff/staff');
-const clubs = require('./routes/api/clubs/clubs');
 const courses = require('./routes/api/courses/courses');
 
 // use routes
 // app.use('/api/bookings', bookings);
 // app.use('/api/staff', staff);
-// app.use('/api/clubs', clubs);
 // app.use('/api/courses', courses);
 
 app.use('/api/auth', require('./controllers/auth.controller'));
 
+// global error handler
 app.use(errorHandler);
 
 

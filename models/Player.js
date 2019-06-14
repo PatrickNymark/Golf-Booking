@@ -13,10 +13,6 @@ const PlayerSchema = new Schema({
     type: Boolean,
     required: true
   },
-  club: {
-    type: Schema.Types.ObjectId,
-    ref: 'clubs'
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: 'users'
