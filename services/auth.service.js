@@ -9,7 +9,7 @@ module.exports = {
   registerUser,
   loginUser,
   registerStaff,
-  getAll
+  deleteUser
 }
 
 /**
@@ -46,6 +46,14 @@ async function registerStaff(staffData) {
 }
 
 /**
+ * Delete user.
+ * @param id a string that represents a user's id.
+ */
+async function deleteUser(id) {
+  return await User.findByIdAndRemove(id);
+}
+
+/**
  * Login user
  * @param email a string that represents a user's email
  * @param password a string that represents a user's plain password
@@ -62,8 +70,4 @@ async function loginUser(email, password) {
       token
     }
   }
-}
-
-async function getAll() {
-  return await User.find().exec();
 }
