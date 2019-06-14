@@ -1,19 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 // controllers
 const authController = require('../../controllers/authController');
 
 /**
- * Find all clubs
+ * register user
  */
 router.post('/register', authController.register)
 
 /**
- * Create new club
+ * login user
  */
 router.post('/login', authController.login);
 
+/**
+ * All users
+ */
+router.get('/all', passport.authenticate(), authController.getAll)
 
 
 

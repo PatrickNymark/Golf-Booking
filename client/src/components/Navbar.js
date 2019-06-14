@@ -1,40 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 class Navbar extends Component {
-  state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    role: ''
-  }
-
-  onChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  onSubmit = (e) => {
-    e.preventDefault();
-
-    const payload = {
-      name: {
-        first: this.state.firstName,
-        last: this.state.lastName,
-      },
-      password: this.state.password,
-      email: this.state.email,
-      role: this.state.role
-    }
-
-    axios.post('/api/auth/register', payload).then(res => {
-      console.log(res.data)
-    })
-  }
-
   render() {
     return (
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -54,6 +23,9 @@ class Navbar extends Component {
             <li class="nav-item">
               <Link to="/register" class="nav-link">Register</Link> 
             </li>
+            <li class="nav-item">
+              <Link to="/all" class="nav-link">All</Link> 
+            </li>
           </ul>
         </div>
       </nav>
@@ -61,4 +33,12 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+function mapStateToProps(state) {
+  const { loggedIn } = state.authentication;
+  return {
+      loggedIn
+  };
+}
+
+const connectedNavBar = connect(mapStateToProps)(Navbar);
+export {connectedNavBar as Navbar};

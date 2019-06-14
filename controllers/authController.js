@@ -42,10 +42,17 @@ exports.login = (req, res) => {
         role: user.role
       }
 
-      jwt.sign(payload, process.env.secretOrKey, { expiresIn: '2d'}, (err, token) => {
+      jwt.sign(payload, process.env.secretOrKey, { expiresIn: '2h'}, (err, token) => {
+        if (err) throw err;
         res.json({ success: true, token: 'bearer ' + token });
       })
     });
+  })
+}
+
+exports.getAll = (req, res) => {
+  User.find().then(users => {
+    res.json(users)
   })
 }
 
