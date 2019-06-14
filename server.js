@@ -40,6 +40,8 @@ const courses = require('./routes/api/courses/courses');
 // app.use('/api/courses', courses);
 
 app.use('/api/auth', require('./controllers/auth.controller'));
+app.use('/api/course', require('./controllers/course.controller'));
+
 
 // global error handler
 app.use(errorHandler);
