@@ -2,19 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
-// roles
-const roles = require('../helpers/roles');
-
 const UserSchema = new Schema({
-  name: {
-    first: {
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
       type: String,
       required: true
-    },
-    last: {
-      type: String,
-      required: true
-    }
   },
   email: {
     type: String,
@@ -29,9 +24,8 @@ const UserSchema = new Schema({
     minlength: 3,
     maxlength: 255
   },
-  role: {
-    type: String,
-    enum: roles
+  roles: {
+    staff: { type: Schema.Types.ObjectId, ref: 'staff' }
   }
 }, {
   timestamps: true
@@ -51,19 +45,5 @@ UserSchema.pre("save", function(next) {
     });
   });
 })
-
-UserSchema.methods.comparePassword = function(plainPassword, cb) {
-  bcrypt.compare(plainPassword, this.password, (err, isMatch) => {
-    if (err) return cb(err);
-
-    return cb(null, isMatch);
-  });
-};
-
-UserSchema.virtual('fullName').get(function () {
-  return this.firstName + ' ' + this.lastName;
-});
-
-
 
 module.exports = User = mongoose.model('users', UserSchema);
