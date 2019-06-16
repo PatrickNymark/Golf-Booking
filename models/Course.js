@@ -16,6 +16,8 @@ const CourseSchema = new Schema({
       xCordinate: Number
     }
   }]
+}, {
+  timestamps: true
 })
 
 module.exports = Course = mongooose.model('courses', CourseSchema);

@@ -5,6 +5,8 @@ const authorize = require('../helpers/role-auth');
 
 // routes
 router.post('/create', authorize('staff'), createCourse);
+router.post('/delete/:id', deleteCourse);
+router.post('/update/:id', updateCourse);
 module.exports = router;
 
 function createCourse(req, res, next) {
@@ -12,4 +14,17 @@ function createCourse(req, res, next) {
     .then(course => res.json(course))
     .catch(err => next(err));
 }
+
+function deleteCourse(req, res, next) {
+  courseService.deleteCourse(req.params.id)
+    .then(course => res.json(course))
+    .catch(err => next(err))
+}
+
+function updateCourse(req, res, next) {
+  courseService.updateCourse(req.params.id, req.body)
+    .then(course => res.json(course))
+    .catch(err => next(err))
+}
+
 
