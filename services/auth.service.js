@@ -33,9 +33,16 @@ async function registerUser(userData) {
  */
 async function registerStaff(staffData) {
   const staff = new Staff(staffData);
+  const user = await User.findById(staffData.user);
+
   // check if user exists 
-  if(!await User.findById(staffData.user)) {
+  if(!user) {
     throw 'User id "' + staffData.user + '" not found'; 
+  }
+
+  // check if a staff is already connected
+  if(user.roles.staff) {
+    throw 'User id "' + staffData.user + '" is already connected to Staff id "' + user.roles.staff + '"';
   }
 
   // update user with staff
