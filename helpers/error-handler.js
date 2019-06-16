@@ -8,7 +8,14 @@ function errorHandler(err, req, res, next) {
 
     if (err.name === 'ValidationError') {
         // mongoose validation error
-        return res.status(400).json({ error: err.message });
+        // get each errors message
+        const { errors } = err;
+        const errorArr = [];
+        Object.keys(errors).forEach(key => {
+            errorArr.push(errors[key].message);
+        });
+        
+        return res.status(400).json({ error: errorArr });
     }
 
     if (err.name === 'UnauthorizedError') {
