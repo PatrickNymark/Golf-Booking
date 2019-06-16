@@ -1,10 +1,12 @@
 
 // models
 const Staff = require('../models/Staff');
+const User = require('../models/User');
 
 module.exports = {
   createStaff,
-  deleteStaff
+  deleteStaff,
+  updateStaff
 }
 
 /**
@@ -34,9 +36,32 @@ async function createStaff(staffData) {
 }
 
 /**
- * 
+ * Delete staff
  * @param {string} id a string that represents a staff's id.
+ * @returns A Promise or exception
  */
 async function deleteStaff(id) {
-  return await Staff.findByIdAndRemove(id);
+  // get connected user
+  const staff = await Staff.findById(id);
+  const user = await User.findById(staff.user);
+  // remove staff from user
+  user.roles.staff = null;
+  await user.save();
+  
+  return await staff.remove();
+}
+
+/**
+ * Update staff
+ * @param {string} id a string that represents a staff's id
+ * @param {object} staffData a object that represents the staff's data
+ * @returns A Promise or exception
+ */
+async function updateStaff(id, staffData) {
+  const staff = await Staff.findById(id);
+
+  staff.gender = staffData.gender;
+  staff.user = staffData.user;
+
+  return await staff.save();
 }

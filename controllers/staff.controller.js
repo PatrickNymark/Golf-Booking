@@ -5,6 +5,7 @@ const staffService = require('../services/staff.service');
 // routes
 router.post('/create', createStaff);
 router.post('/delete/:id', deleteStaff);
+router.post('/update/:id', updateStaff);
 module.exports = router;
 
 function createStaff(req, res, next) {
@@ -19,3 +20,8 @@ function deleteStaff(req, res, next) {
     .catch(err => next(err))
 }
 
+function updateStaff(req, res, next) {
+  staffService.deleteStaff(req.params.id, req.body)
+    .then(staff => res.json(staff))
+    .catch(err => next(err))
+}
