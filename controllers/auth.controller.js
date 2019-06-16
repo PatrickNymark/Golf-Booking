@@ -4,21 +4,15 @@ const authService = require('../services/auth.service');
 const authorize = require('../helpers/role-auth');
 
 // routes
-router.post('/user/register', registerUser);
-router.post('/staff/register', registerStaff);
+router.post('/register', registerUser);
 router.post('/login', loginUser);
+router.post('/delete/:id', deleteUser);
 module.exports = router;
 
 function registerUser(req, res, next) {
   authService.registerUser(req.body)
     .then(user => res.json(user))
     .catch(err => next(err));
-}
-
-function registerStaff(req, res, next) {
-  authService.registerStaff(req.body)
-    .then(staff => res.json(staff))
-    .catch(err => next(err))
 }
 
 function deleteUser(req, res, next) {

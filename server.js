@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/api/auth', require('./controllers/auth.controller'));
+app.use('/api/staff', require('./controllers/staff.controller'));
 app.use('/api/course', require('./controllers/course.controller'));
 
 

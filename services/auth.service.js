@@ -3,18 +3,16 @@ const bcrypt = require('bcrypt')
 
 // models
 const User = require('../models/User');
-const Staff = require('../models/Staff');
 
 module.exports = {
   registerUser,
   loginUser,
-  registerStaff,
-  deleteUser
+  deleteUser,
 }
 
 /**
  * Register user.
- * @param userData an object that represents a user.
+ * @param {object} userData an object that represents a user.
  * @returns A Promise or exception.
  */
 async function registerUser(userData) {
@@ -26,35 +24,10 @@ async function registerUser(userData) {
   return await user.save();
 }
 
-/**
- * Register staff.
- * @param staffData an object that represents a staff.
- * @returns A Promise or exception.
- */
-async function registerStaff(staffData) {
-  const staff = new Staff(staffData);
-  const user = await User.findById(staffData.user);
-
-  // check if user exists 
-  if(!user) {
-    throw 'User id "' + staffData.user + '" not found'; 
-  }
-
-  // check if a staff is already connected
-  if(user.roles.staff) {
-    throw 'User id "' + staffData.user + '" is already connected to Staff id "' + user.roles.staff + '"';
-  }
-
-  // update user with staff
-  user.roles.staff = staff.id;
-  await user.save();
-
-  return await staff.save();
-}
 
 /**
  * Delete user.
- * @param id a string that represents a user's id.
+ * @param {string} id a string that represents a user's id.
  */
 async function deleteUser(id) {
   return await User.findByIdAndRemove(id);
@@ -62,8 +35,8 @@ async function deleteUser(id) {
 
 /**
  * Login user
- * @param email a string that represents a user's email
- * @param password a string that represents a user's plain password
+ * @param {string} email a string that represents a user's email
+ * @param {string} password a string that represents a user's plain password
  * @returns a Promise or exception  
  */
 async function loginUser(email, password) {
