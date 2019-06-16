@@ -15,7 +15,7 @@ module.exports = {
  */
 async function createCourse(courseData) {
   if (await Course.findOne({ title: courseData.title })) {
-    throw 'Title "' + userData.title + '" is already taken';
+    throw 'Title "' + courseData.title + '" is already taken';
   }
 
   const course = new Course(courseData);
