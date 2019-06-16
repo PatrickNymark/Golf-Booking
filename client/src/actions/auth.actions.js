@@ -1,5 +1,4 @@
 import { authConstants } from '../constants';
-import { alertActions } from '../actions';
 import { authService } from '../services';
 import { history } from '../helpers';
 export const userActions = {
@@ -19,7 +18,6 @@ function login(email, password) {
                 },
                 error => {
                     dispatch(failure(error));
-                    dispatch(alertActions.error(error));
                 }
             );
     };

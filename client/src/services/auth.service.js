@@ -1,11 +1,16 @@
 import { authHeader } from '../helpers';
 import jwt_decode from 'jwt-decode';
 
-export const userService = {
+export const authService = {
     login,
     logout
 };
 
+/**
+ * Login user
+ * @param {string} email 
+ * @param {string} password 
+ */
 function login(email, password) {
     const requestOptions = {
         method: 'POST',
@@ -41,7 +46,7 @@ function handleResponse(response) {
                 Location.reload(true);
             }
 
-            const error = data.error || response.statusText;
+            const error = data.message || data.error || response.statusText;
             return Promise.reject(error);
         }
 
