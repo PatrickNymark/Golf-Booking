@@ -15,14 +15,14 @@ function registerUser(req, res, next) {
     .catch(err => next(err));
 }
 
-function deleteUser(req, res, next) {
-  authService.deleteUser(req.params.id)
-    .then(user => res.json(user))
-    .catch(err => next(err));
-}
-
 function loginUser(req, res, next) {
   authService.loginUser(req.body.email, req.body.password)
     .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
     .catch(err => next(err))
+}
+
+function deleteUser(req, res, next) {
+  authService.deleteUser(req.params.id)
+    .then(user => res.json(user))
+    .catch(err => next(err));
 }
