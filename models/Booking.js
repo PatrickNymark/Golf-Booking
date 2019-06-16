@@ -4,19 +4,21 @@ const Schema = mongoose.Schema;
 const BookingSchema = new Schema({
   players: [{
     type: Schema.Types.ObjectId,
+    ref: 'players',
     required: true
   }],
-  club: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
   course: {
     type: Schema.Types.ObjectId,
+    ref: 'courses',
     required: true
   },
-  time: {
+  date: {
     type: Date,
     required: true
+  },
+  creator: {
+    type: Schema.Types.ObjectId,
+    ref: 'players'
   }
 });
 
