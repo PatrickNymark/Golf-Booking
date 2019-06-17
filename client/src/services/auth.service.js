@@ -1,4 +1,5 @@
 import { authHeader } from '../helpers';
+//import { handleResponse } from '../helpers';
 import jwt_decode from 'jwt-decode';
 
 export const authService = {
@@ -21,7 +22,7 @@ function login(email, password) {
     return fetch(`/api/auth/login`, requestOptions)
         .then(handleResponse)
         .then(response => {
-            const { token } = response;
+            const token = 'bearer ' + response.token;
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem('user', JSON.stringify(token));
 
@@ -35,6 +36,8 @@ function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
 }
+
+
 
 function handleResponse(response) {
     return response.text().then(text => {

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { userActions } from '../actions';
-import { history } from '../helpers';
+import { userActions } from '../../actions';
+import { history } from '../../helpers';
 
-class LoginPage extends React.Component {
+class Login extends Component {
     constructor(props) {
         super(props);
 
@@ -41,12 +41,15 @@ class LoginPage extends React.Component {
     }
 
     render() {
-        const { loading } = this.props;
+        const { loading, errors } = this.props;
         const { email, password, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
+                    {errors && <div class="alert alert-danger text-center" role="alert">
+                        {errors}
+                    </div>}
                     <div className="form-group">
                         <label htmlFor="email">email</label>
                         <input type="text" className="form-control" name="email" value={email} onChange={this.handleChange} />
@@ -74,13 +77,14 @@ class LoginPage extends React.Component {
 }
 
 function mapStateToProps(state) {
-    const { loading, isAuthenticated } = state.authentication;
+    const { loading, isAuthenticated, errors } = state.authentication;
     //const { loggedIn } = state.user;
     return {
         loading,
-        isAuthenticated
+        isAuthenticated,
+        errors
     };
 }
 
-const connectedLoginPage = connect(mapStateToProps)(LoginPage);
-export { connectedLoginPage as LoginPage }; 
+const connectedLoginPage = connect(mapStateToProps)(Login);
+export { connectedLoginPage as Login }; 
