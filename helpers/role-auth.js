@@ -10,6 +10,7 @@ function authorize(roles = []) {
 
     return [
         // authenticate JWT token and attach user to request object (req.user)
+        // if the JWT has an expiration (exp), it will be checked
         jwt({ secret: process.env.secretOrKey }),
 
         // authorize based on user role
