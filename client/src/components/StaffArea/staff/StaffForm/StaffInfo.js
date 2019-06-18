@@ -15,7 +15,7 @@ class StaffInfo extends Component {
             <option value="female">Female</option>
           </select>
           <button className="btn btn-primary mt-2" onClick={handleForm}>Prev</button>
-          <button className="btn btn-primary mt-2 ml-2" onClick={handleForm}>Submit</button>
+          <button className="btn btn-primary mt-2 ml-2" type="submit">Submit</button>
         </div>
     )
   }

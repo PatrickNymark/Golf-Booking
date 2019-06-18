@@ -3,7 +3,8 @@ import axios from 'axios';
 import { setAuthToken } from '../helpers';
 
 export const authService = {
-    login
+    login,
+    register
 };
 
 /**
@@ -27,3 +28,15 @@ function login(email, password) {
             return decoded;
         });
 }
+
+/**
+ * Login user
+ * @param {string} email 
+ * @param {string} password 
+ */
+function register(userData) {
+    return axios.post('/api/auth/register', userData).then(response => {
+        return response.data;
+    });
+}
+

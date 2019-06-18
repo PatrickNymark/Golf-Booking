@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import StaffInfo from './StaffInfo';
 import UserInfo from './UserInfo';
+import { connect } from 'react-redux';
+import { authActions, staffActions } from '../../../../actions';
+import axios from 'axios';
 
 class StaffForm extends Component {
     constructor(props) {
@@ -33,8 +36,8 @@ class StaffForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        const { firstName, lastName, email, password } = this.state;
 
-       
     }
 
     render() {
@@ -64,4 +67,5 @@ class StaffForm extends Component {
     }
 }
 
-export default StaffForm; 
+const connectedStaffForm = connect(null)(StaffForm);
+export { connectedStaffForm as StaffForm };

@@ -13,7 +13,7 @@ class Navbar extends Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
 
     return (
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,6 +30,10 @@ class Navbar extends Component {
             {!isAuthenticated && 
               <li class="nav-item">
                 <Link to="/login" class="nav-link">Login</Link>
+              </li> }
+            {isAuthenticated && user.role.staff &&
+                <li class="nav-item">
+                  <Link  to="/staff/admin" class="nav-link">Admin</Link>
               </li> }
             <li class="nav-item">
               <Link to="/register" class="nav-link">Register</Link> 
