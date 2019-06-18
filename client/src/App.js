@@ -6,11 +6,8 @@ import { history } from './helpers/history';
 import { authActions } from './actions';
 
 import { Navbar } from './components/Navbar';
-import { Login } from './components/auth/Login';
-import HomePage from './components/HomePage';
-import Users from './components/Users';
-import { PrivateRoute } from './components/PrivateRoute';
-import { Role } from './helpers';
+
+import Routes from './components/routing/Routes';
 
 class App extends Component {
   componentDidMount() {
@@ -22,9 +19,7 @@ class App extends Component {
         <Router history={history}>
           <div>
             <Navbar />
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute exact path="/all" roles={[Role.Staff, 'admin']} component={Users} />
+            <Routes Route={Route} />
           </div>
         </Router>
     );

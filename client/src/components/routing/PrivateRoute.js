@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import  { isEmpty } from '../helpers';
+import  { isEmpty } from '../../helpers';
 
 const PrivateRoute = ({ component: Component, auth, roles, ...rest }) => (
     <Route {...rest} render={props => {
