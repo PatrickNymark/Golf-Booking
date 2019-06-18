@@ -8,6 +8,7 @@ import Users from '../Users';
 import { CourseForm } from '../StaffArea/course/CourseForm';
 import StaffPage from '../StaffArea/StaffPage';
 import { StaffForm } from '../StaffArea/staff/StaffForm/StaffForm';
+import Bookings from '../booking/Bookings';
 
 const Routes = ({ Route }) => {
   return (
@@ -18,7 +19,9 @@ const Routes = ({ Route }) => {
       <Route exact path="/course/create" component={CourseForm} />
       <PrivateRoute exact path="/staff/admin" roles={Role.Staff} component={StaffPage} />
       <Route exact path="/staff/create" component={StaffForm} />
+      <Route exact path="/bookings" component={Bookings} />
     </div>
+
   )
 }
 
