@@ -1,9 +1,12 @@
-export function authHeader() {
-  // return authorization header with jwt token
-  let token = JSON.parse(localStorage.getItem('user'));
+import axios from 'axios';
+
+export const setAuthToken = token => {
   if (token) {
-      return { 'Authorization': 'Bearer ' + token };
+    // Apply to every request
+    axios.defaults.headers.common['Authorization'] = token;
   } else {
-      return {};
+    // Delete auth header
+    delete axios.defaults.headers.common['Authorization'];
   }
-}
+};
+

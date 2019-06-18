@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { userActions } from '../../actions';
+import { authActions } from '../../actions';
 import { history } from '../../helpers';
 
 class Login extends Component {
@@ -36,7 +36,7 @@ class Login extends Component {
         const { email, password } = this.state;
         const { dispatch } = this.props;
         if (email && password) {
-            dispatch(userActions.login(email, password));
+            dispatch(authActions.login(email, password));
         }
     }
 

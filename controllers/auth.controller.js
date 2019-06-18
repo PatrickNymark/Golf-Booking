@@ -7,6 +7,7 @@ const authorize = require('../helpers/role-auth');
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/delete/:id', deleteUser);
+router.get('/all', authorize('staff'), getAll);
 module.exports = router;
 
 function registerUser(req, res, next) {
@@ -25,4 +26,10 @@ function deleteUser(req, res, next) {
   authService.deleteUser(req.params.id)
     .then(user => res.json(user))
     .catch(err => next(err));
+}
+
+function getAll(req, res, next) {
+  authService.getAll()
+    .then(users => res.json(users))
+    .catch(err => next(err))
 }

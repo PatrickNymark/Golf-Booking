@@ -1,32 +1,34 @@
 import { authConstants } from '../constants';
-import jwt_decode from 'jwt-decode';
-
-// get token from localstorage
-const token = JSON.parse(localStorage.getItem('user'));
-// decode token
-const user = token ? jwt_decode(token) : null;
-// set login status
-// const initialState = user ? { loggedIn: true, user } : {};
+import { isEmpty } from '../helpers';
 
 const initialState = {
-    isAuthenticated: null,
+    isAuthenticated: false,
     loading: false,
-    user: user
+    user: {}
   };
 
 export function authentication(state = initialState, action) {
     switch (action.type) {
+    case authConstants.USER_LOADED:
+        return {
+            ...state,
+            isAuthenticated: !isEmpty(action.user),
+            user: action.user
+        }
+    case authConstants.USER_REQUEST:
     case authConstants.LOGIN_REQUEST:
         return {
         loading: true,
         user: action.user
         };
+    case authConstants.USER_SUCCESS:
     case authConstants.LOGIN_SUCCESS:
         return {
         loading: false,
-        isAuthenticated: true,
+        isAuthenticated: !isEmpty(action.user),
         user: action.user
         };
+    case authConstants.USER_FAILURE:
     case authConstants.LOGIN_FAILURE:
         return {
         errors: action.error

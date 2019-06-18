@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import { authActions } from '../actions';
+import { history } from '../helpers';
 
-class Navbar extends Component {
+
+class Navbar extends Component {  
+
+  handleLogout = () => {
+    const { dispatch } = this.props;
+    dispatch(authActions.logout());
+  }
+
   render() {
+    const { isAuthenticated } = this.props.auth;
+
     return (
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <Link to="/" class="navbar-brand" href="#">Navbar</Link>
@@ -17,15 +27,20 @@ class Navbar extends Component {
             <li class="nav-item active">
               <Link to="/" class="nav-link">Home <span class="sr-only">(current)</span></Link>
             </li>
-            <li class="nav-item">
-              <Link to="/login" class="nav-link">Login</Link>
-            </li>
+            {!isAuthenticated && 
+              <li class="nav-item">
+                <Link to="/login" class="nav-link">Login</Link>
+              </li> }
             <li class="nav-item">
               <Link to="/register" class="nav-link">Register</Link> 
             </li>
             <li class="nav-item">
               <Link to="/all" class="nav-link">All</Link> 
             </li>
+            {isAuthenticated && 
+              <li class="nav-item">
+                <Link onClick={this.handleLogout} to="/login" class="nav-link">Logout</Link>
+              </li> }
           </ul>
         </div>
       </nav>
@@ -34,9 +49,8 @@ class Navbar extends Component {
 }
 
 function mapStateToProps(state) {
-  const { loggedIn } = state.authentication;
   return {
-      loggedIn
+      auth: state.authentication
   };
 }
 

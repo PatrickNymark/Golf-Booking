@@ -8,6 +8,7 @@ module.exports = {
   registerUser,
   loginUser,
   deleteUser,
+  getAll
 }
 
 /**
@@ -44,10 +45,14 @@ async function loginUser(email, password) {
   
   if(user && bcrypt.compareSync(password, user.password)) {
     const { password, ...userWithOutPass } = user.toObject();
-    const token = jwt.sign({ sub: user.id, role: user.roles }, process.env.secretOrKey, { expiresIn: '2d'});
+    const token = jwt.sign({ sub: user.id, role: user.roles }, process.env.secretOrKey, { expiresIn: '2m'});
     return {
       ...userWithOutPass,
       token
     }
   }
+}
+
+async function getAll() {
+  return await User.find().select('-password');
 }
