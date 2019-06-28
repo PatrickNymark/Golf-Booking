@@ -25,7 +25,8 @@ const UserSchema = new Schema({
     maxlength: 255
   },
   roles: {
-    staff: { type: Schema.Types.ObjectId, ref: 'staff' }
+    staff: { type: Schema.Types.ObjectId, ref: 'staff' },
+    player: { type: Schema.Types.ObjectId, ref: 'players' }
   }
 }, {
   timestamps: true

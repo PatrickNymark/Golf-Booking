@@ -20,6 +20,10 @@ function authorize(roles = []) {
               return res.status(401).json({ message: 'Unauthorized' });
             }
 
+            if(isEmpty(req.user.role.player) && roles.includes('player')) {
+                return res.status(401).json({ message: 'Unauthorized'})
+            }
+
             // authentication and authorization successful
             next();
         }
