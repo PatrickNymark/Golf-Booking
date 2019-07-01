@@ -45,7 +45,7 @@ async function loginUser(email, password) {
   
   if(user && bcrypt.compareSync(password, user.password)) {
     const { password, ...userWithOutPass } = user.toObject();
-    const token = jwt.sign({ sub: user.id, role: user.roles }, process.env.secretOrKey, { expiresIn: '2m'});
+    const token = jwt.sign({ sub: user.id, role: user.roles }, process.env.secretOrKey, { expiresIn: '2d'});
     return {
       ...userWithOutPass,
       token

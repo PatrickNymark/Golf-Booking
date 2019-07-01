@@ -15,17 +15,15 @@ function authorize(roles = []) {
 
         // authorize based on user role
         (req, res, next) => {
-            // staff authorization
-            if(isEmpty(req.user.role.staff) && roles.includes('staff'))  {
-              return res.status(401).json({ message: 'Unauthorized' });
-            }
+            // check for possible roles authorization
+            return Object.keys(req.user.role).forEach(key => {
+                if(roles.includes(key)) {
+                    // authentication and authorization successful
+                    return next();
+                }
 
-            if(isEmpty(req.user.role.player) && roles.includes('player')) {
-                return res.status(401).json({ message: 'Unauthorized'})
-            }
-
-            // authentication and authorization successful
-            next();
+               return res.status(401).json({ message: 'Unauthorized' });
+            }); 
         }
     ];
 }
