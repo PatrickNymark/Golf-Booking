@@ -27,6 +27,9 @@ app.use(express.json());
 app.use('/api/auth', require('./controllers/auth.controller'));
 app.use('/api/staff', require('./controllers/staff.controller'));
 app.use('/api/course', require('./controllers/course.controller'));
+app.use('/api/player', require('./controllers/player.controller'));
+app.use('/api/booking', require('./controllers/booking.controller'));
+
 
 
 // global error handler

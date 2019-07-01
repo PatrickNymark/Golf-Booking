@@ -16,6 +16,12 @@ const BookingSchema = new Schema({
     type: Date,
     required: true
   },
+  timeKey: {
+    type: Number
+  },
+  timeValue: {
+    type: Number
+  },
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'players'
