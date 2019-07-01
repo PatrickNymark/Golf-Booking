@@ -18,22 +18,22 @@ const Modal = ({ modal, handleModal }) => {
                         <th>Lastname</th> 
                         <th>Age</th>
                       </tr>
+                      <tr>
+                        <td className="modal-content-left">Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                      </tr>
+                      <tr>
+                        <td className="modal-content-left">Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                      </tr>
+                      <tr>
+                        <td className="modal-content-left">John</td>
+                        <td>Doe</td>
+                        <td>80</td>
+                      </tr>
                     </tbody>
-                    <tr>
-                      <td className="modal-content-left">Jill</td>
-                      <td>Smith</td>
-                      <td>50</td>
-                    </tr>
-                    <tr>
-                      <td className="modal-content-left">Eve</td>
-                      <td>Jackson</td>
-                      <td>94</td>
-                    </tr>
-                    <tr>
-                      <td className="modal-content-left">John</td>
-                      <td>Doe</td>
-                      <td>80</td>
-                    </tr>
                   </table>
                 </div>
               </div>

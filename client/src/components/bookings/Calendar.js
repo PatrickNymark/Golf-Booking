@@ -5,7 +5,7 @@ import './style.css';
 import BookingRow from './BookingRow';
 import Modal from './Modal';
 import {Calendar as Cal } from 'react-calendar';
-import { bookingService } from '../../services/booking.service'
+import { bookingService, courseService } from '../../services'; 
 
 
 class Calendar extends Component {
@@ -49,12 +49,12 @@ class Calendar extends Component {
 
   getCourse() {
     const { course } = this.props.match.params;
-
-    axios.get(`/api/course/${course}`).then(response => {
+    
+    courseService.getCourseById(course).then(course => {
       this.setState({
-        course: response.data
+        course
       })
-    }); 
+    })
   }
 
   onNext = () => {
