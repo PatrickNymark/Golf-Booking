@@ -36,15 +36,12 @@ class Calendar extends Component {
 
   getBookings() {
     const { course } = this.props.match.params;
-    
-    const startDate = this.state.date.format('MM-DD-YYYY');
-    const endDate = moment(startDate).add(1, 'd').format('MM-DD-YYYY');
 
-    bookingService.getBookingsByDate(course, startDate, endDate).then(bookings => {
+    bookingService.getBookingsByDate(course, this.state.date).then(bookings => {
       this.setState({
         bookings
       })
-    })
+    });
   }
 
   getCourse() {
@@ -58,25 +55,20 @@ class Calendar extends Component {
   }
 
   onNext = () => {
-    const date = moment(this.state.date).add(1, 'd');
-
     this.setState({
-      date: date
+      date: moment(this.state.date).add(1, 'd')
     })
   }
 
-  onPrev = () => {
-    const date = moment(this.state.date).subtract(1, 'd');
-    
+  onPrev = () => {    
     this.setState({
-      date: date
+      date: moment(this.state.date).subtract(1, 'd')
     })
   }
 
   onChange = (date) => {
-    const momentDate = moment(date);
     this.setState({
-      date: momentDate
+      date: moment(date)
     })
   }
 
