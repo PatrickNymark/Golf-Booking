@@ -5,7 +5,8 @@ const Course = require('../models/Course');
 module.exports = {
   createCourse,
   deleteCourse,
-  updateCourse
+  updateCourse,
+  getCourseById
 }
 
 /**
@@ -44,4 +45,13 @@ async function updateCourse(id, courseData) {
   course.holes = courseData.holes
 
   return await course.save();
+}
+
+/**
+* Get course by id
+* @param {string} id an string that represents a course's id
+* @returns A Promise or exception
+*/
+async function getCourseById(id) {
+ return await Course.findById(id);
 }
