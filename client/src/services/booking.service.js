@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const authService = {
+export const bookingService = {
     getBookingsByDate
 };
 
