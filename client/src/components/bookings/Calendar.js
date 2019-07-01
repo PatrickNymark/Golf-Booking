@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import moment from 'moment';
-import axios from 'axios';
-import './style.css';
-import BookingRow from './BookingRow';
-import Modal from './Modal';
-import {Calendar as Cal } from 'react-calendar';
+import {Calendar as ReactCalendar } from 'react-calendar';
 import { bookingService, courseService } from '../../services'; 
+import './style.css';
 
+import BookingHeader from './BookingHeader';
+import RowWrapper from './RowWrapper';
+import Modal from './Modal';
 
 class Calendar extends Component {
   constructor(props) {
@@ -79,13 +79,14 @@ class Calendar extends Component {
   }
  
   render() {
+    const { date, interval, hours, bookings, modal } = this.state;
     return (
       <div className="container"> 
         <h1 className="display-5 mt-5 mb-5 text-center">Bookings</h1>
 
         <div className="row">
           <div className="col-4">
-            <Cal className="calendar" locale="en" value={this.state.date.toDate()} onChange={this.onChange} />
+            <ReactCalendar className="calendar" locale="en" value={date.toDate()} onChange={this.onChange} />
           </div>
 
           <div className="col-8">
@@ -95,65 +96,30 @@ class Calendar extends Component {
                 <li onClick={this.onPrev} class="prev">&#10094;</li>
                 <li onClick={this.onNext} class="next">&#10095;</li>
                 <li>
-                  {this.state.date.format('dddd DD')}
+                  {date.format('dddd DD')}
                   <br />
-                  <span>{this.state.date.format('MMMM')}</span>
+                  <span>{date.format('MMMM')}</span>
                 </li>
               </ul>
             </div>
 
-            <Modal modal={this.state.modal} handleModal={this.handleModal} />
+            <Modal modal={modal} handleModal={this.handleModal} />
 
             <table className="hours">
               <thead>
                 <tr>
-                <th>07</th>
-                <th>08</th>
-                <th>09</th>
-                <th>10</th>
-                <th>11</th>
-                <th>12</th>
-                <th>13</th>
-                <th>14</th>
-                <th>15</th>
-                <th>16</th>
-                <th>17</th>
-                <th>18</th>
-                <th>19</th>
-                <th>20</th>
-                <th>21</th>
-                <th>22</th>
-              </tr>
-              </thead>
-              
+                  <BookingHeader hours={hours} />
+                </tr>
+              </thead>        
               
               <tbody>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="00" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 0)} />
-                </tr>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="10" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 10)} />
-                </tr>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="20" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 20)} />
-                </tr>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="30" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 30)} />
-                </tr>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="40" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 40)} />
-                </tr>
-                <tr className="hours-row">
-                  <BookingRow handleModal={this.handleModal} text="50" hours={this.state.hours} bookings={this.state.bookings.filter(booking => booking.timeValue === 50)} />
-                </tr>
+                <RowWrapper date={date} interval={interval} hours={hours} handleModal={this.handleModal} bookings={bookings} />
               </tbody>
             </table>
             </div>
           </div>
         </div>
       </div>
-
-      
     )
   }
 }

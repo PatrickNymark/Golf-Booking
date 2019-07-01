@@ -1,6 +1,6 @@
 import React from 'react'
 
-const  BookingRow = ({ hours, handleModal, text, bookings}) => {
+const BookingRow = ({ hours, handleModal, text, bookings}) => {
   return (
     <React.Fragment>
       {Array.from(Array(hours), (e, i) =>  {
