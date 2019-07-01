@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { history } from './helpers/history';
+import './style.css';
 
 import { authActions } from './actions';
 
@@ -17,7 +18,7 @@ class App extends Component {
   render() {
     return (
         <Router history={history}>
-          <div>
+          <div className="app">
             <Navbar />
             <Routes Route={Route} />
           </div>

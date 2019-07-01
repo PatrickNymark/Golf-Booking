@@ -39,6 +39,9 @@ class Navbar extends Component {
               <Link to="/register" class="nav-link">Register</Link> 
             </li>
             <li class="nav-item">
+              <Link to="/bookings" class="nav-link">Bookings</Link> 
+            </li>
+            <li class="nav-item">
               <Link to="/all" class="nav-link">All</Link> 
             </li>
             {isAuthenticated && 
